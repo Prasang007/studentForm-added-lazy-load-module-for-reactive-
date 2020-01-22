@@ -1,0 +1,138 @@
+<form class="container" [formGroup]="studentForm" (ngSubmit)="onSubmit()"  >
+    
+    <div class ="form-group" >
+      <label for="rollNo">Roll No:</label>
+      <input class="form-control" 
+      type="text"
+      placeholder="Only Numbers Allowed" 
+      formControlName="rollNo">
+      <p class="text-danger" 
+        *ngIf=" !studentForm.controls['rollNo'].valid 
+        && studentForm.controls['rollNo'].errors?.rollNo ">
+      Enter valid Roll No</p> 
+      <p class="text-danger" 
+        *ngIf=" studentForm.controls['rollNo'].errors?.required 
+        && studentForm.controls['rollNo'].touched">
+        This is required</p>
+    </div>
+
+    <div class ="form-group" >
+        <label for="name">Name: </label>
+        <input class="form-control"  
+        type="text"
+        placeholder="Only Alphabets Allowed" 
+        formControlName="name"
+         >
+         <p class="text-danger" 
+         *ngIf=" !studentForm.controls['name'].valid 
+         && studentForm.controls['name'].errors?.name ">
+       Enter valid name</p> 
+       <p class="text-danger" 
+         *ngIf=" studentForm.controls['name'].errors?.required 
+         && studentForm.controls['name'].touched">
+         This is required</p>
+     </div>
+        
+     <div class ="form-group" >
+      <label for="name">Email: </label>
+      <input class="form-control"  
+      type="text" 
+      placeholder="abcd@gmail.com"
+      formControlName="email"
+       >
+       <p class="text-danger" 
+       *ngIf=" !studentForm.controls['email'].valid 
+       && studentForm.controls['email'].errors?.email ">
+     Not a valid email</p> 
+     <p class="text-danger" 
+       *ngIf=" studentForm.controls['email'].errors?.required 
+       && studentForm.controls['email'].touched">
+       This is required</p>
+   </div>
+          
+    <div class ="form-group" >
+        <label for="address">Address:</label>
+        <input class="form-control" 
+        type="text" 
+        placeholder="1/ Mansarovar, Jaipur" 
+        formControlName="address">
+        <p class="text-danger" 
+        *ngIf=" (studentForm.controls['address'].touched )
+        && !studentForm.controls['address'].valid">This is required</p>
+  
+      </div>
+  
+     
+   
+
+    <div class ="form-group" >
+      <label for="gender">Gender:</label>
+      <label *ngFor="let gender of genders">
+          <input type="radio"  
+          formControlName="gender" 
+          value={{gender}} r
+          >
+          {{gender}}
+      </label>
+    </div>
+    <div class ="form-group" >
+      <label for="mobileNo">Mobile No:</label>
+      <input class="form-control" 
+      type="text"
+      placeholder="10 digit mobile number"
+      formControlName="mobileNo"
+     >
+     <p class="text-danger" 
+       *ngIf=" !studentForm.controls['mobileNo'].valid 
+       && studentForm.controls['mobileNo'].errors?.length ">
+     Too many Numbers </p> 
+     <p class="text-danger" 
+       *ngIf=" !studentForm.controls['mobileNo'].valid 
+       && studentForm.controls['mobileNo'].errors?.mobileNo ">
+     Not a valid mobileNo</p> 
+     <p class="text-danger" 
+       *ngIf=" studentForm.controls['mobileNo'].errors?.required 
+       && studentForm.controls['mobileNo'].touched">
+       This is required</p>
+    </div>
+
+    <div class ="form-group" >
+      <label for="city">City :</label>
+      <select class="form-control" 
+      
+      formControlName="city">
+        <option value="" disabled selected hidden>Choose your City</option>
+        <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
+    </select>
+      <p class="text-danger" 
+      *ngIf=" (studentForm.controls['city'].touched  )
+      && !studentForm.controls['city'].valid">Please select a Value</p>
+    </div> 
+
+
+   <div class ="form-group" >
+      <label for="Hobbies">Hobbies:</label> 
+      <span *ngFor="let hobby of hobbies; let i = index;"> 
+        <input type="checkbox"  
+        [value]="hobby"
+        (click)="onCheckChange($event)" 
+        formArrayName="hobbies"
+        >{{hobby}}
+      </span>
+      <p class="text-danger" 
+      *ngIf=" (studentForm.controls['hobbies'].touched
+       && !studentForm.controls['hobbies'].valid) 
+      || (submitted 
+      && !studentForm.controls['hobbies'].valid)">Please select a Value</p>
+      </div> 
+
+
+    <button type="submit"  class="btn btn-success" >Submit</button>
+</form>
+
+
+ <div *ngIf="studentForm.valid && submitted" class="container">
+  <div *ngFor="let control of studentForm.value | keyvalue">
+    {{control.key}}  :  {{control.value}}
+  </div>
+ </div>       

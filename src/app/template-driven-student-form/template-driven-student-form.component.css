@@ -1,0 +1,10 @@
+div{
+    margin-top:10px;
+
+}
+div * {
+    margin-left: 10px;
+}
+.text-danger span {
+    margin: 0;
+}

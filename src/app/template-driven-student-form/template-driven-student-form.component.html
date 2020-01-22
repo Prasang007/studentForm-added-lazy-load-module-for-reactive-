@@ -1,0 +1,140 @@
+<form class="container" #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)" >
+    
+    <div class ="form-group" >
+      <label for="rollNo">Roll No:</label>
+      <input class="form-control" 
+      type="text" 
+      placeholder="Only Numbers Allowed" [(ngModel)]="student.rollNo"
+      name="RollNo"  
+      required #rollNo="ngModel" 
+      pattern="^[0-9]*$"
+      > 
+      <p class="text-danger" *ngIf="(rollNo.touched || rollNo.dirty 
+      || studentForm.submitted) && rollNo.errors?.required">
+      This is required</p>
+      <p class="text-danger"*ngIf="(rollNo.touched || rollNo.dirty)
+      && rollNo.errors?.pattern"> Enter valid Roll No</p>
+	
+        
+    </div>
+    
+    <div class ="form-group" >
+      <label for="name">Name: </label>
+      <input class="form-control"  
+      type="text" 
+      placeholder="Only Alphabets Allowed" [(ngModel)]="student.name"
+      name="student.name"
+      required
+      pattern="^[a-zA-Z]*$" #name="ngModel" >
+      <p class="text-danger" *ngIf="(name.touched || name.dirty
+      || studentForm.submitted)
+      && name.errors?.required">
+      This is required</p>
+      <p class="text-danger"*ngIf="(name.touched || name.dirty)
+      && name.errors?.pattern"> Enter valid Name</p>
+      
+    </div>
+    
+    <div class ="form-group" >
+      <label for="email">Email: </label>
+      <input class="form-control"  
+      type="text" 
+      placeholder="abcd@gmail.com" [(ngModel)]="student.email"
+      name="student.email"
+      required 
+      pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+      #email="ngModel" >
+      <p class="text-danger" *ngIf="(email.touched || email.dirty
+      || studentForm.submitted)
+      && email.errors?.required">
+      This is required</p>
+      <p class="text-danger"*ngIf="(email.touched || email.dirty)
+      && email.errors?.pattern"> Enter valid Email</p>
+      
+    </div>
+    
+    <div class ="form-group" >
+      <label for="address">Address:</label>
+      <input class="form-control" 
+      type="text"  type="text" 
+      placeholder="1/ Mansarovar, Jaipur" [(ngModel)]="student.address"
+      name="student.address" 
+      required #address="ngModel" >
+      <p class="text-danger" *ngIf="(address.touched || address.dirty
+      || studentForm.submitted)
+      && address.errors?.required">
+      This is required</p>
+      <p class="text-danger"*ngIf="(address.touched || address.dirty)
+      && address.errors?.pattern"> Enter valid Address</p>
+
+    </div>
+
+    <div class ="form-group" >
+      <label for="gender">Gender:</label>
+      <label *ngFor="let gender of genders">
+          <input type="radio" name="student.gender" 
+           [(ngModel)]="student.gender" 
+          value={{gender}} r
+          required >
+          {{gender}}
+      </label>
+    </div>
+    <div class ="form-group" >
+      <label for="mobileNo">Mobile No:</label>
+      <input class="form-control" 
+      type="text"
+      placeholder="10 digit mobile number" [(ngModel)]="student.mobileNo"
+      name="student.mobileNo"  
+      pattern="[0-9]{10}"
+      required #mobileNo="ngModel" >
+      <p class="text-danger" *ngIf="(mobileNo.touched || mobileNo.dirty
+      || studentForm.submitted)
+      && mobileNo.errors?.required">
+      This is required</p>
+      <p class="text-danger"*ngIf="mobileNo.errors?.pattern"> 
+      Enter<span *ngIf="mobileNo.value.length > 10"> 10 digit</span> valid Mobile Number</p>
+      
+
+    </div>
+    <div class ="form-group" >
+      <label for="city">City :</label>
+      <select class="form-control" 
+      name="student.city" 
+      [(ngModel)]="student.city"
+      required 
+      #city="ngModel">
+        <option value="" disabled selected hidden>Choose your City</option>
+        <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
+    </select>
+      <p class="text-danger" 
+      *ngIf=" (city.touched || studentForm.submitted) 
+      && !city.valid">Please select a Value</p>
+    </div>
+
+
+    <div class ="form-group" >
+      <label for="Hobbies">Hobbies:</label> 
+      <span *ngFor="let hobby of hobbies; let i = index;"> 
+        <input type="checkbox" 
+        ngModel 
+        name="Hobbies+{{i}}"
+        
+        (click)="addHobby(hobby)"
+        
+        >{{hobby}}
+      </span>
+      <p class="text-danger" 
+      *ngIf=" clicked && !student.hobbies.length ">Please select a Value</p>
+      </div>
+     
+
+    <button type="submit"  class="btn btn-success" >Submit</button>
+</form>
+
+
+ <div  class="container" *ngIf="studentForm.valid && submitted"  >
+  <div *ngFor="let control of student | keyvalue">
+
+    {{control.key}}  :  {{control.value}}
+  </div>
+ </div>       

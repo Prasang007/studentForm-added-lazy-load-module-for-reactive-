@@ -1,0 +1,14 @@
+nav{
+    display: flex;
+}
+nav a{
+    text-decoration: none;
+    margin: 5px;
+    padding: 20px;
+    background-color: antiquewhite;   
+    border-radius: 10px;
+    color: black;
+}
+.active{
+    background-color: #e22b2b8c !important;
+} 

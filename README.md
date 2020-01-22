@@ -1,27 +1,26 @@
-# StudentForm
+Reactive and Template Driven Forms 
+Basic 
+Student Form that takes five Input forms from user including a checkbox, radio button and a select dropdown.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+Validation:
+All fields are mandatory(required)
 
-## Development server
+Roll No: Allow only numbers 
+Name: Allow only Alphabets
+Email: Should follow email format
+Mobile No: Allow numbers only
+Mobile No: Not more than 10 digits
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Use ng serve to use the application at http://localhost:4200
 
-## Code scaffolding
+and npm run build:ssr && npm run serve:ssr
+to pre render the application on express server at http://localhost:4000 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+lazy load module was imported by writing 
+ng g module module-name --route route-path --module app.module
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+route-path is path that should be in the url to for this component to be displayed 
+--module add this path in app routing module
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
